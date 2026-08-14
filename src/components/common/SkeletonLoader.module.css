@@ -1,0 +1,72 @@
+.cardSkeleton {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageSkeleton {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-primary-100) 25%, var(--color-primary-200) 50%, var(--color-primary-100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.contentSkeleton {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lineSmall, .lineMedium, .lineLarge, .priceSkeleton, .btnSkeleton, .tableCellLine {
+  background: linear-gradient(90deg, var(--color-primary-100) 25%, var(--color-primary-200) 50%, var(--color-primary-100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-xs);
+}
+
+.lineSmall {
+  height: 12px;
+  width: 40%;
+}
+
+.lineMedium {
+  height: 18px;
+  width: 85%;
+}
+
+.lineLarge {
+  height: 14px;
+  width: 60%;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.priceSkeleton {
+  height: 24px;
+  width: 35%;
+}
+
+.btnSkeleton {
+  height: 36px;
+  width: 36px;
+  border-radius: var(--radius-md);
+}
+
+.tableCell {
+  padding: 1rem;
+}
+
+.tableCellLine {
+  height: 16px;
+  width: 75%;
+}

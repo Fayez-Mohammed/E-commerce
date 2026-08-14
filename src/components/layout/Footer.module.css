@@ -1,0 +1,231 @@
+.footer {
+  background-color: var(--color-primary-950);
+  color: var(--color-primary-300);
+  margin-top: 5rem;
+}
+
+/* Value Props Strip */
+.featuresStrip {
+  background-color: var(--color-primary-900);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3rem 0;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.featureCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: rgba(217, 119, 6, 0.15);
+  color: var(--color-accent-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.featureDesc {
+  font-size: 0.8125rem;
+  color: var(--color-primary-400);
+  line-height: 1.4;
+}
+
+/* Main Footer */
+.mainFooter {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  width: 38px;
+  height: 38px;
+  background: var(--color-accent-600);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoLetter {
+  color: #FFFFFF;
+  font-weight: 900;
+  font-size: 1.25rem;
+  font-family: var(--font-en);
+}
+
+.brandTitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+  font-family: var(--font-en);
+}
+
+.brandBio {
+  font-size: 0.875rem;
+  color: var(--color-primary-400);
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--color-primary-300);
+}
+
+/* Links Columns */
+.colTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.linksList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.linksList a {
+  font-size: 0.875rem;
+  color: var(--color-primary-400);
+  transition: color var(--transition-fast);
+}
+
+.linksList a:hover {
+  color: var(--color-accent-400);
+}
+
+/* Newsletter */
+.newsletterDesc {
+  font-size: 0.875rem;
+  color: var(--color-primary-400);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.newsletterForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.newsletterInput {
+  flex: 1;
+  height: 44px;
+  background-color: var(--color-primary-900);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 0 1rem;
+  color: #FFFFFF;
+  font-size: 0.875rem;
+}
+
+.newsletterInput:focus {
+  border-color: var(--color-accent-500);
+}
+
+.newsletterBtn {
+  height: 44px;
+  padding: 0 1.25rem;
+  background-color: var(--color-accent-600);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background-color var(--transition-fast);
+}
+
+.newsletterBtn:hover {
+  background-color: var(--color-accent-700);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--color-primary-500);
+}
+
+.heartIcon {
+  color: #EF4444;
+  vertical-align: middle;
+  margin: 0 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+  .bottomBar {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+}

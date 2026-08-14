@@ -1,0 +1,55 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.starBtn {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: default;
+}
+
+.starBtn.interactive {
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.starBtn.interactive:hover {
+  transform: scale(1.2);
+}
+
+.star {
+  transition: all var(--transition-fast);
+}
+
+.star.filled {
+  fill: #F59E0B;
+  color: #F59E0B;
+}
+
+.star.half {
+  fill: #FDE68A;
+  color: #F59E0B;
+}
+
+.star.empty {
+  fill: transparent;
+  color: var(--color-primary-300);
+}
+
+.ratingText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}

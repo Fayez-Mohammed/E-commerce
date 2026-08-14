@@ -1,0 +1,96 @@
+:root {
+  /* Brand Core Colors */
+  --color-primary-950: #0C0A09;
+  --color-primary-900: #1C1917;
+  --color-primary-800: #292524;
+  --color-primary-700: #44403C;
+  --color-primary-600: #57534E;
+  --color-primary-500: #78716C;
+  --color-primary-400: #A8A29E;
+  --color-primary-300: #D6D3CD;
+  --color-primary-200: #E7E5E0;
+  --color-primary-100: #F5F4F0;
+  --color-primary-50:  #FAF9F6;
+
+  /* Warm Ochre / Terracotta Brass Accents */
+  --color-accent-900: #78350F;
+  --color-accent-800: #92400E;
+  --color-accent-700: #B45309;
+  --color-accent-600: #D97706;
+  --color-accent-500: #F59E0B;
+  --color-accent-400: #FBBF24;
+  --color-accent-300: #FDE68A;
+  --color-accent-100: #FEF3C7;
+  --color-accent-50:  #FFFBEB;
+
+  /* Functional Surfaces */
+  --bg-app: var(--color-primary-50);
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-subtle: var(--color-primary-100);
+  --bg-muted: #ECEAE4;
+  
+  /* Text Tokens */
+  --text-primary: var(--color-primary-900);
+  --text-secondary: var(--color-primary-700);
+  --text-muted: var(--color-primary-500);
+  --text-subtle: var(--color-primary-400);
+  --text-inverse: #FFFFFF;
+  --text-accent: var(--color-accent-700);
+
+  /* Border Tokens */
+  --border-subtle: #ECEAE4;
+  --border-light: var(--color-primary-200);
+  --border-medium: var(--color-primary-300);
+  --border-focus: var(--color-accent-600);
+
+  /* Status Colors */
+  --color-success: #15803D;
+  --color-success-bg: #DCFCE7;
+  --color-warning: #B45309;
+  --color-warning-bg: #FEF3C7;
+  --color-error: #DC2626;
+  --color-error-bg: #FEE2E2;
+  --color-info: #0369A1;
+  --color-info-bg: #E0F2FE;
+
+  /* Typography */
+  --font-ar: 'Cairo', 'Readex Pro', system-ui, -apple-system, sans-serif;
+  --font-en: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-family: var(--font-ar);
+
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Elevation & Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 2px 4px 0 rgba(28, 25, 23, 0.05), 0 1px 2px 0 rgba(28, 25, 23, 0.03);
+  --shadow-md: 0 4px 12px -2px rgba(28, 25, 23, 0.08), 0 2px 6px -1px rgba(28, 25, 23, 0.04);
+  --shadow-lg: 0 12px 24px -4px rgba(28, 25, 23, 0.10), 0 4px 10px -2px rgba(28, 25, 23, 0.05);
+  --shadow-xl: 0 20px 35px -6px rgba(28, 25, 23, 0.12), 0 8px 16px -4px rgba(28, 25, 23, 0.06);
+  --shadow-glow: 0 0 20px rgba(217, 119, 6, 0.25);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-max: 1320px;
+  --header-height: 80px;
+}
+
+/* LTR Specific Typography & Overrides */
+[dir="ltr"] {
+  --font-family: var(--font-en);
+}
+
+[dir="rtl"] {
+  --font-family: var(--font-ar);
+}
