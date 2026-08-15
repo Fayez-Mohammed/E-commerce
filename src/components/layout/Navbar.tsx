@@ -128,36 +128,6 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header className={`${styles.header} ${!isVisible && !isMobileMenuOpen ? styles.headerHidden : ''}`}>
-        {/* Top Notification & Utility Strip */}
-        <div className={styles.topBar}>
-          <div className={`container ${styles.topBarContent}`}>
-            <div className={styles.announcement}>
-              <Sparkles size={13} className={styles.sparkleIcon} />
-              <span>
-                {language === 'ar'
-                  ? 'شحن وتوصيل لكافة محافظات مصر | ضمان جودة الأخشاب الطبيعية'
-                  : 'Free delivery across Egypt | Premium Solid Wood Guarantee'}
-              </span>
-            </div>
-
-            <div className={styles.topBarActions}>
-              <a href="tel:01027016323" className={styles.phoneLink}>
-                <Phone size={12} />
-                <span>01027016323</span>
-              </a>
-
-              <button
-                onClick={toggleLanguage}
-                className={styles.langBtn}
-                title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
-              >
-                <Globe size={13} />
-                <span>{language === 'ar' ? 'English' : 'عربي'}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Main Consolidated Navigation Header */}
         <div className={styles.mainNav}>
           <div className={`container ${styles.navContent}`}>
@@ -239,6 +209,23 @@ export const Navbar: React.FC = () => {
                   </button>
                 </form>
               </div>
+
+              {/* Customer Support Phone Hotline (Desktop) */}
+              <a href="tel:01027016323" className={styles.headerPhoneLink} title="01027016323">
+                <Phone size={14} />
+                <span>01027016323</span>
+              </a>
+
+              {/* Language Switcher Button in Header */}
+              <button
+                onClick={toggleLanguage}
+                className={styles.headerLangBtn}
+                title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
+                aria-label="Toggle language"
+              >
+                <Globe size={16} />
+                <span className={styles.langText}>{language === 'ar' ? 'English' : 'عربي'}</span>
+              </button>
 
               {/* Wishlist Button */}
               <Link to="/wishlist" className={styles.iconBtn} aria-label={t('wishlist')} title={t('wishlist')}>
