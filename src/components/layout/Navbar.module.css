@@ -504,22 +504,36 @@
   .userFirstName {
     display: none;
   }
-  .brandTitle {
-    font-size: 1.1rem;
+  .loginText {
+    display: none;
   }
-  .brandSubtitle {
-    font-size: 0.5rem;
-  }
-  .logoIcon {
-    width: 32px;
-    height: 32px;
-  }
-  .logoLetter {
-    font-size: 1.1rem;
-  }
-  .iconBtn {
+  .loginBtn {
     width: 36px;
     height: 36px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .brandTitle {
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+  }
+  .brandSubtitle {
+    display: none;
+  }
+  .logoIcon {
+    width: 30px;
+    height: 30px;
+  }
+  .logoLetter {
+    font-size: 1rem;
+  }
+  .iconBtn {
+    width: 34px;
+    height: 34px;
+  }
+  .rightActions {
+    gap: 0.25rem;
   }
 }
 

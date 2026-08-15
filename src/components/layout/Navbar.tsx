@@ -270,9 +270,9 @@ export const Navbar: React.FC = () => {
                     <ChevronDown size={12} className={styles.chevron} />
                   </button>
                 ) : (
-                  <Link to="/login" className={styles.loginBtn}>
-                    <User size={16} />
-                    <span>{t('login')}</span>
+                  <Link to="/login" className={styles.loginBtn} aria-label={t('login')} title={t('login')}>
+                    <User size={18} />
+                    <span className={styles.loginText}>{t('login')}</span>
                   </Link>
                 )}
 
