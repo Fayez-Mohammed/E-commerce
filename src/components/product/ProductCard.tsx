@@ -125,6 +125,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </span>
             )}
           </div>
+
+          {/* Dedicated Touch-friendly Add to Cart Button for Mobile */}
+          <button
+            type="button"
+            className={styles.mobileCardAddBtn}
+            onClick={handleQuickAdd}
+            aria-label={t('addToCart')}
+          >
+            <ShoppingBag size={15} />
+            <span>{t('addToCart')}</span>
+          </button>
         </div>
       </div>
     </div>

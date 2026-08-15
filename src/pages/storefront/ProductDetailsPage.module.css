@@ -649,12 +649,27 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  box-shadow: var(--shadow-sm);
-  transition: background-color var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(12, 10, 9, 0.15);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
 }
 
-.addToCartBtn:hover {
+.addToCartBtn:hover:not(:disabled) {
   background-color: var(--color-accent-600);
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.25);
+  transform: translateY(-1px);
+}
+
+.addToCartBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.addToCartBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .wishlistToggleBtn {
@@ -1046,6 +1061,10 @@
     width: 100%;
     order: 3;
     height: 50px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
   }
   .variantGrid {
     grid-template-columns: 1fr;
