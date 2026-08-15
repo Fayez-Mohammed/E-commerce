@@ -1,7 +1,9 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { useLanguageStore } from '@/stores/languageStore';
 
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+const DEFAULT_API_URL = 'https://bestwallshop.runasp.net';
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || DEFAULT_API_URL).trim().replace(/\/+$/, '');
+export const API_BASE_URL = rawBaseUrl.endsWith('/api') ? rawBaseUrl.slice(0, -4) : rawBaseUrl;
 
 export const api = axios.create({
   baseURL: API_BASE_URL ? `${API_BASE_URL}/api` : '/api',

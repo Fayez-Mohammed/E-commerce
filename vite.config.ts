@@ -14,18 +14,18 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://localhost:7047',
+        target: 'https://bestwallshop.runasp.net',
         changeOrigin: true,
         secure: false,
       },
       '/hubs': {
-        target: 'https://localhost:7047',
+        target: 'https://bestwallshop.runasp.net',
         ws: true,
         changeOrigin: true,
         secure: false,
       },
       '/images': {
-        target: 'https://localhost:7047',
+        target: 'https://bestwallshop.runasp.net',
         changeOrigin: true,
         secure: false,
       },
