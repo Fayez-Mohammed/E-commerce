@@ -74,10 +74,13 @@ export const getErrorMessage = (error: unknown, fallback = 'حدث خطأ غير
   if (axios.isAxiosError(error) && error.response?.data) {
     const data = error.response.data;
     if (typeof data === 'string') return data;
+    if (Array.isArray(data)) {
+      return data.map((e: any) => e.description || e.message || e).join(', ');
+    }
     if (data.response && typeof data.response === 'string') return data.response;
     if (data.message && typeof data.message === 'string') return data.message;
     if (data.response && Array.isArray(data.response)) {
-      return data.response.map((e: any) => e.description || e).join(', ');
+      return data.response.map((e: any) => e.description || e.message || e).join(', ');
     }
     if (data.errors && typeof data.errors === 'object') {
       const msgs = Object.values(data.errors).flat();

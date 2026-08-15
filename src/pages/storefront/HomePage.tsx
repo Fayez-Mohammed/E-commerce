@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ArrowRight,
   ArrowLeft,
@@ -21,12 +21,17 @@ import { ProductOverview, CategoryItem, OfferItem } from '@/types';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/common/SkeletonLoader';
 import { getImageUrl } from '@/services/api';
+import { ConfirmEmailPage } from '@/pages/auth/ConfirmEmailPage';
 import styles from './HomePage.module.css';
 
 export const HomePage: React.FC = () => {
   const { t, language, direction } = useLanguageStore();
   const navigate = useNavigate();
   const isRtl = direction === 'rtl';
+
+  const [searchParams] = useSearchParams();
+  const confirmToken = searchParams.get('token');
+  const confirmEmail = searchParams.get('email');
 
   const [recentProducts, setRecentProducts] = useState<ProductOverview[]>([]);
   const [ratedProducts, setRatedProducts] = useState<ProductOverview[]>([]);
@@ -47,6 +52,8 @@ export const HomePage: React.FC = () => {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
+    if (confirmToken && confirmEmail) return;
+
     let isMounted = true;
     const fetchData = async () => {
       setIsLoading(true);
@@ -191,6 +198,11 @@ export const HomePage: React.FC = () => {
     touchEndY.current = null;
     setIsOfferPaused(false);
   };
+
+  // If email confirmation link is opened from root URL with token & email
+  if (confirmToken && confirmEmail) {
+    return <ConfirmEmailPage />;
+  }
 
   return (
     <div className={styles.homeContainer}>
