@@ -8,6 +8,8 @@
   transition: all var(--transition-base);
   position: relative;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -22,6 +24,7 @@
   position: relative;
   aspect-ratio: 4 / 3;
   width: 100%;
+  min-width: 0;
   overflow: hidden;
   background-color: var(--bg-subtle);
 }
@@ -43,49 +46,40 @@
   transform: scale(1.06);
 }
 
-/* Badges */
+/* Badges & Actions using Logical Properties for RTL & LTR */
 .discountBadge {
   position: absolute;
-  top: 0.625rem;
-  left: 0.625rem;
+  top: 0.75rem;
+  inset-inline-start: 0.75rem;
   background-color: var(--color-accent-600);
   color: #FFFFFF;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.625rem;
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
   z-index: 2;
-}
-
-[dir="rtl"] .discountBadge {
-  left: auto;
-  right: 0.625rem;
+  pointer-events: none;
 }
 
 .wishlistBtn {
   position: absolute;
-  top: 0.625rem;
-  right: 0.625rem;
-  width: 34px;
-  height: 34px;
+  top: 0.75rem;
+  inset-inline-end: 0.75rem;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
   color: var(--color-primary-700);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: all var(--transition-fast);
-  z-index: 2;
+  z-index: 4;
   border: none;
   cursor: pointer;
-}
-
-[dir="rtl"] .wishlistBtn {
-  right: auto;
-  left: 0.625rem;
 }
 
 .wishlistBtn:hover {
@@ -245,6 +239,18 @@
   .imageContainer {
     aspect-ratio: 4 / 2.8;
   }
+  .discountBadge {
+    top: 0.625rem;
+    inset-inline-start: 0.625rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
+  .wishlistBtn {
+    top: 0.625rem;
+    inset-inline-end: 0.625rem;
+    width: 36px;
+    height: 36px;
+  }
   .details {
     padding: 1rem;
     gap: 0.5rem;
@@ -258,13 +264,5 @@
   }
   .originalPrice {
     font-size: 0.875rem;
-  }
-  .discountBadge {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.6rem;
-  }
-  .wishlistBtn {
-    width: 36px;
-    height: 36px;
   }
 }
