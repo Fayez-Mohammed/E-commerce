@@ -353,21 +353,24 @@
 
 .variantGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 0.75rem;
 }
 
 .variantCard {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-md);
+  padding: 0.8125rem 0.9375rem;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-lg);
   background-color: var(--bg-surface);
   cursor: pointer;
   transition: all var(--transition-fast);
   text-align: left;
+  gap: 0.5rem;
+  min-width: 0;
+  outline: none;
 }
 
 [dir="rtl"] .variantCard {
@@ -376,28 +379,99 @@
 
 .variantCard:hover {
   border-color: var(--color-primary-400);
+  transform: translateY(-1px);
 }
 
 .variantActive {
   border-color: var(--color-accent-600);
   background-color: var(--color-accent-50);
+  box-shadow: 0 0 0 1px var(--color-accent-600);
 }
 
 .variantInfo {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
 }
 
-.variantName {
-  font-size: 0.875rem;
+.variantSizeRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.9375rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-primary-950);
+  line-height: 1.35;
+  flex-wrap: wrap;
+}
+
+.sizeWrapper {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  unicode-bidi: isolate;
+}
+
+.dimensionNumbers {
+  font-family: var(--font-en), system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: var(--color-primary-950);
+}
+
+.unitLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  unicode-bidi: isolate;
+}
+
+.sizeText {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-primary-950);
+  unicode-bidi: isolate;
+}
+
+.variantType {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary-800);
+  background-color: var(--color-primary-100);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+  align-self: flex-start;
+  line-height: 1.4;
+  word-break: break-word;
+  unicode-bidi: isolate;
+}
+
+.variantActive .variantType {
+  background-color: rgba(217, 119, 6, 0.15);
+  color: var(--color-accent-800);
 }
 
 .variantPrice {
-  font-size: 0.8125rem;
+  font-size: 0.84375rem;
   color: var(--color-accent-800);
-  font-weight: 600;
+  font-weight: 700;
+  margin-top: 0.125rem;
+  unicode-bidi: isolate;
+}
+
+.checkIndicator {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .variantCheck {

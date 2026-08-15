@@ -30,6 +30,64 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { getImageUrl } from '@/services/api';
 import styles from './ProductDetailsPage.module.css';
 
+/**
+ * Formats size/dimension text with strict BiDi isolation so Width × Depth × Height
+ * renders in natural logical order without reversing in RTL.
+ */
+const renderVariantSize = (sizeStr: string | undefined | null) => {
+  if (!sizeStr) return null;
+  const trimmed = sizeStr.trim();
+  if (!trimmed) return null;
+
+  // Regex to match dimension expressions (e.g. 200×60×220, 200*160, 200 x 60 x 220, 200x160)
+  const dimensionRegex = /([\d\.\s]+(?:[\*xX×]\s*[\d\.\s]+)+)(.*)/;
+  const match = trimmed.match(dimensionRegex);
+
+  if (match) {
+    const rawDims = match[1];
+    const rawUnit = match[2]?.trim() || '';
+
+    // Standardize spacing around multiplication sign
+    const normalizedDims = rawDims.replace(/\s*[\*xX×]\s*/g, ' × ').trim();
+
+    return (
+      <span className={styles.sizeWrapper}>
+        <bdi dir="ltr" className={styles.dimensionNumbers}>
+          {normalizedDims}
+        </bdi>
+        {rawUnit && (
+          <span className={styles.unitLabel}>
+            <bdi>{rawUnit}</bdi>
+          </span>
+        )}
+      </span>
+    );
+  }
+
+  // Single number + measurement unit (e.g. "200 سم", "180 cm")
+  const singleMeasureRegex = /^([\d\.]+)\s*(.*)$/;
+  const singleMatch = trimmed.match(singleMeasureRegex);
+  if (singleMatch && singleMatch[2]) {
+    return (
+      <span className={styles.sizeWrapper}>
+        <bdi dir="ltr" className={styles.dimensionNumbers}>
+          {singleMatch[1]}
+        </bdi>
+        <span className={styles.unitLabel}>
+          <bdi>{singleMatch[2].trim()}</bdi>
+        </span>
+      </span>
+    );
+  }
+
+  // Text fallback (e.g. "Standard", "كبير", "Large")
+  return (
+    <span className={styles.sizeText}>
+      <bdi>{trimmed}</bdi>
+    </span>
+  );
+};
+
 export const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const productId = parseInt(id || '0', 10);
@@ -369,18 +427,29 @@ export const ProductDetailsPage: React.FC = () => {
                   return (
                     <button
                       key={v.id}
+                      type="button"
                       className={`${styles.variantCard} ${isSelected ? styles.variantActive : ''}`}
                       onClick={() => setSelectedVariant(v)}
                     >
                       <div className={styles.variantInfo}>
-                        <span className={styles.variantName}>
-                          {v.size} {v.type && `- ${v.type}`}
-                        </span>
+                        <div className={styles.variantSizeRow}>
+                          {renderVariantSize(v.size)}
+                        </div>
+
+                        {v.type && (
+                          <span className={styles.variantType}>
+                            <bdi>{v.type}</bdi>
+                          </span>
+                        )}
+
                         <span className={styles.variantPrice}>
-                          {v.price.toLocaleString()} {t('currency')}
+                          <bdi>{v.price.toLocaleString()} {t('currency')}</bdi>
                         </span>
                       </div>
-                      {isSelected && <Check size={16} className={styles.variantCheck} />}
+
+                      <div className={styles.checkIndicator}>
+                        {isSelected && <Check size={16} className={styles.variantCheck} />}
+                      </div>
                     </button>
                   );
                 })}

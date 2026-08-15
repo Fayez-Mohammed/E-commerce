@@ -98,8 +98,16 @@ export const CartDrawer: React.FC = () => {
                           {language === 'ar' ? item.color : item.englishColor || item.color}
                         </span>
                       )}
-                      {item.size && <span className={styles.tag}>{item.size}</span>}
-                      {item.type && <span className={styles.tag}>{item.type}</span>}
+                      {item.size && (
+                        <span className={styles.tag}>
+                          <bdi dir="ltr">{item.size}</bdi>
+                        </span>
+                      )}
+                      {item.type && (
+                        <span className={styles.tag}>
+                          <bdi>{item.type}</bdi>
+                        </span>
+                      )}
                     </div>
 
                     {/* Quantity & Unit Price */}
