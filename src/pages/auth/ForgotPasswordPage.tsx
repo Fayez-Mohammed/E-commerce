@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, KeyRound, Lock, CheckCircle2, RefreshCw, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useLanguageStore } from '@/stores/languageStore';
 import { useToast } from '@/components/common/Toast';
+import { PasswordInput } from '@/components/common/PasswordInput';
 import { authService } from '@/services/authService';
 import { getErrorMessage } from '@/services/api';
 import styles from './Auth.module.css';
@@ -200,34 +201,26 @@ export const ForgotPasswordPage: React.FC = () => {
             <form className={styles.authForm} onSubmit={handleResetPassword}>
               <div className={styles.inputGroup}>
                 <label className={styles.label}>{t('newPassword')}</label>
-                <div className={styles.inputWrapper}>
-                  <Lock size={18} className={styles.inputIcon} />
-                  <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className={styles.authInput}
-                    required
-                    minLength={6}
-                  />
-                </div>
+                <PasswordInput
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className={styles.authInput}
+                  required
+                  minLength={6}
+                />
               </div>
 
               <div className={styles.inputGroup}>
                 <label className={styles.label}>{t('confirmPassword')}</label>
-                <div className={styles.inputWrapper}>
-                  <Lock size={18} className={styles.inputIcon} />
-                  <input
-                    type="password"
-                    value={confirmNewPassword}
-                    onChange={(e) => setConfirmNewPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className={styles.authInput}
-                    required
-                    minLength={6}
-                  />
-                </div>
+                <PasswordInput
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className={styles.authInput}
+                  required
+                  minLength={6}
+                />
               </div>
 
               <button type="submit" disabled={isLoading} className={styles.submitBtn}>

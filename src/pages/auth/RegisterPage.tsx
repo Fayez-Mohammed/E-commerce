@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Phone, UserPlus, CheckCircle2 } from 'lucide-react';
+import { Mail, User, Phone, UserPlus, CheckCircle2 } from 'lucide-react';
 import { useLanguageStore } from '@/stores/languageStore';
 import { useToast } from '@/components/common/Toast';
+import { PasswordInput } from '@/components/common/PasswordInput';
 import { authService } from '@/services/authService';
 import { getErrorMessage } from '@/services/api';
 import styles from './Auth.module.css';
@@ -136,36 +137,28 @@ export const RegisterPage: React.FC = () => {
 
           <div className={styles.inputGroup}>
             <label className={styles.label}>{t('password')} *</label>
-            <div className={styles.inputWrapper}>
-              <Lock size={18} className={styles.inputIcon} />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                className={styles.authInput}
-                required
-                minLength={6}
-              />
-            </div>
+            <PasswordInput
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              className={styles.authInput}
+              required
+              minLength={6}
+            />
           </div>
 
           <div className={styles.inputGroup}>
             <label className={styles.label}>{t('confirmPassword')} *</label>
-            <div className={styles.inputWrapper}>
-              <Lock size={18} className={styles.inputIcon} />
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="••••••••"
-                className={styles.authInput}
-                required
-                minLength={6}
-              />
-            </div>
+            <PasswordInput
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="••••••••"
+              className={styles.authInput}
+              required
+              minLength={6}
+            />
           </div>
 
           <button type="submit" disabled={isLoading} className={styles.submitBtn}>

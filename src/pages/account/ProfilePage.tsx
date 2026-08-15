@@ -4,6 +4,7 @@ import { User, Mail, Phone, Lock, Save, ShieldCheck, CheckCircle2 } from 'lucide
 import { useAuthStore } from '@/stores/authStore';
 import { useLanguageStore } from '@/stores/languageStore';
 import { useToast } from '@/components/common/Toast';
+import { PasswordInput } from '@/components/common/PasswordInput';
 import { authService } from '@/services/authService';
 import { getErrorMessage } from '@/services/api';
 import styles from './ProfilePage.module.css';
@@ -170,49 +171,37 @@ export const ProfilePage: React.FC = () => {
           <form className={styles.form} onSubmit={handlePasswordSubmit}>
             <div className={styles.formGroup}>
               <label className={styles.label}>{t('oldPassword')}</label>
-              <div className={styles.inputWrapper}>
-                <Lock size={18} className={styles.inputIcon} />
-                <input
-                  type="password"
-                  value={passwordData.oldPassword}
-                  onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })}
-                  placeholder="••••••••"
-                  className={styles.input}
-                  required
-                />
-              </div>
+              <PasswordInput
+                value={passwordData.oldPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })}
+                placeholder="••••••••"
+                className={styles.input}
+                required
+              />
             </div>
 
             <div className={styles.formGroup}>
               <label className={styles.label}>{t('newPassword')}</label>
-              <div className={styles.inputWrapper}>
-                <Lock size={18} className={styles.inputIcon} />
-                <input
-                  type="password"
-                  value={passwordData.newPassword}
-                  onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                  placeholder="••••••••"
-                  className={styles.input}
-                  required
-                  minLength={6}
-                />
-              </div>
+              <PasswordInput
+                value={passwordData.newPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                placeholder="••••••••"
+                className={styles.input}
+                required
+                minLength={6}
+              />
             </div>
 
             <div className={styles.formGroup}>
               <label className={styles.label}>{t('confirmPassword')}</label>
-              <div className={styles.inputWrapper}>
-                <Lock size={18} className={styles.inputIcon} />
-                <input
-                  type="password"
-                  value={passwordData.confirmNewPassword}
-                  onChange={(e) => setPasswordData({ ...passwordData, confirmNewPassword: e.target.value })}
-                  placeholder="••••••••"
-                  className={styles.input}
-                  required
-                  minLength={6}
-                />
-              </div>
+              <PasswordInput
+                value={passwordData.confirmNewPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, confirmNewPassword: e.target.value })}
+                placeholder="••••••••"
+                className={styles.input}
+                required
+                minLength={6}
+              />
             </div>
 
             <button type="submit" disabled={isChangingPassword} className={styles.saveBtn}>

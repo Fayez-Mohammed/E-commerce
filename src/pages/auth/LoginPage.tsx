@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Mail, Lock, LogIn, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Mail, LogIn, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { useCartStore } from '@/stores/cartStore';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useLanguageStore } from '@/stores/languageStore';
 import { useToast } from '@/components/common/Toast';
+import { PasswordInput } from '@/components/common/PasswordInput';
 import { authService } from '@/services/authService';
 import { getErrorMessage } from '@/services/api';
 import styles from './Auth.module.css';
@@ -84,17 +85,13 @@ export const LoginPage: React.FC = () => {
                 {t('forgotPassword')}
               </Link>
             </div>
-            <div className={styles.inputWrapper}>
-              <Lock size={18} className={styles.inputIcon} />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className={styles.authInput}
-                required
-              />
-            </div>
+            <PasswordInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className={styles.authInput}
+              required
+            />
           </div>
 
           <button type="submit" disabled={isLoading} className={styles.submitBtn}>

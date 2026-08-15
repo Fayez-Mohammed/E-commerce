@@ -13,6 +13,7 @@ import { useLanguageStore } from '@/stores/languageStore';
 import { useToast } from '@/components/common/Toast';
 import { Badge } from '@/components/common/Badge';
 import { Modal } from '@/components/common/Modal';
+import { PasswordInput } from '@/components/common/PasswordInput';
 import { getErrorMessage } from '@/services/api';
 import styles from './AdminUsersPage.module.css';
 
@@ -243,8 +244,8 @@ export const AdminUsersPage: React.FC = () => {
 
           <div className={styles.formGroup}>
             <label className={styles.label}>{t('password')} *</label>
-            <input
-              type="password"
+            <PasswordInput
+              showLockIcon={false}
               value={adminFormData.password}
               onChange={(e) => setAdminFormData({ ...adminFormData, password: e.target.value })}
               placeholder="••••••••"
