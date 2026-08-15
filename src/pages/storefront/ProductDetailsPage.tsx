@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   Heart,
@@ -141,6 +141,29 @@ export const ProductDetailsPage: React.FC = () => {
 
   // Gallery state
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll active thumbnail into view
+  useEffect(() => {
+    if (thumbnailsRef.current && thumbnailsRef.current.children[activeImageIndex]) {
+      const activeEl = thumbnailsRef.current.children[activeImageIndex] as HTMLElement;
+      activeEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [activeImageIndex]);
+
+  const scrollThumbnails = (direction: 'prev' | 'next') => {
+    if (!thumbnailsRef.current) return;
+    const scrollAmount = 220;
+    const sign = direction === 'next' ? (isRtl ? -1 : 1) : (isRtl ? 1 : -1);
+    thumbnailsRef.current.scrollBy({
+      left: sign * scrollAmount,
+      behavior: 'smooth',
+    });
+  };
 
   // Selection state
   const [selectedColor, setSelectedColor] = useState<ColorDto | null>(null);
@@ -353,18 +376,48 @@ export const ProductDetailsPage: React.FC = () => {
             )}
           </div>
 
-          {/* Thumbnail Gallery */}
+          {/* Thumbnail Gallery Carousel */}
           {imagesList.length > 1 && (
-            <div className={styles.thumbnails}>
-              {imagesList.map((img, idx) => (
+            <div className={styles.thumbnailsContainer}>
+              {imagesList.length > 4 && (
                 <button
-                  key={idx}
-                  className={`${styles.thumbBtn} ${idx === activeImageIndex ? styles.thumbActive : ''}`}
-                  onClick={() => setActiveImageIndex(idx)}
+                  type="button"
+                  className={`${styles.thumbNavBtn} ${styles.thumbNavPrev}`}
+                  onClick={() => scrollThumbnails('prev')}
+                  aria-label="Previous thumbnails"
                 >
-                  <img src={getImageUrl(img.path)} alt={`${product.name} thumbnail ${idx + 1}`} />
+                  {isRtl ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
                 </button>
-              ))}
+              )}
+
+              <div className={styles.thumbnails} ref={thumbnailsRef}>
+                {imagesList.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`${styles.thumbBtn} ${idx === activeImageIndex ? styles.thumbActive : ''}`}
+                    onClick={() => setActiveImageIndex(idx)}
+                    aria-label={`View image ${idx + 1}`}
+                  >
+                    <img
+                      src={getImageUrl(img.path)}
+                      alt={`${product.name} thumbnail ${idx + 1}`}
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
+              </div>
+
+              {imagesList.length > 4 && (
+                <button
+                  type="button"
+                  className={`${styles.thumbNavBtn} ${styles.thumbNavNext}`}
+                  onClick={() => scrollThumbnails('next')}
+                  aria-label="Next thumbnails"
+                >
+                  {isRtl ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                </button>
+              )}
             </div>
           )}
         </div>
