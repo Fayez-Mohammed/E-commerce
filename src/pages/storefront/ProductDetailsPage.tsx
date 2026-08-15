@@ -32,59 +32,89 @@ import styles from './ProductDetailsPage.module.css';
 
 /**
  * Formats size/dimension text with strict BiDi isolation so Width × Depth × Height
- * renders in natural logical order without reversing in RTL.
+ * renders in natural logical order without reversing in RTL or breaking out of cards.
  */
 const renderVariantSize = (sizeStr: string | undefined | null) => {
   if (!sizeStr) return null;
-  const trimmed = sizeStr.trim();
-  if (!trimmed) return null;
+  const raw = sizeStr.trim();
+  if (!raw) return null;
 
-  // Regex to match dimension expressions (e.g. 200×60×220, 200*160, 200 x 60 x 220, 200x160)
-  const dimensionRegex = /([\d\.\s]+(?:[\*xX×]\s*[\d\.\s]+)+)(.*)/;
-  const match = trimmed.match(dimensionRegex);
+  // Insert spacing around numbers, units, and multiplication symbols if they are glued together
+  // e.g. "العرض220سم×العمق40سم×الارتفاع180سم" -> "العرض 220 سم × العمق 40 سم × الارتفاع 180 سم"
+  const spaced = raw
+    // Put spaces around multiplier characters ×, *, x, X
+    .replace(/\s*([×\*xX])\s*/g, ' × ')
+    // Put spaces between letters and digits
+    .replace(/([\u0600-\u06FFa-zA-Z])(\d)/g, '$1 $2')
+    .replace(/(\d)([\u0600-\u06FFa-zA-Z])/g, '$1 $2')
+    // Put spaces around units
+    .replace(/\s*(سم|متر|cm|mm|m)\b/gi, ' $1')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  if (match) {
-    const rawDims = match[1];
-    const rawUnit = match[2]?.trim() || '';
+  // Check if string has multipliers (×, *, x)
+  if (spaced.includes('×')) {
+    const parts = spaced.split('×').map((p) => p.trim()).filter(Boolean);
 
-    // Standardize spacing around multiplication sign
-    const normalizedDims = rawDims.replace(/\s*[\*xX×]\s*/g, ' × ').trim();
+    // Check if parts have descriptive words (e.g. "العرض 220 سم", "Width 220 cm")
+    const hasLabels = parts.some((p) => /[\u0600-\u06FFa-zA-Z]{3,}/.test(p));
+
+    if (hasLabels) {
+      return (
+        <div className={styles.labeledDimsGrid}>
+          {parts.map((part, idx) => (
+            <span key={idx} className={styles.dimChunk}>
+              <bdi>{part}</bdi>
+              {idx < parts.length - 1 && <span className={styles.dimSep}>×</span>}
+            </span>
+          ))}
+        </div>
+      );
+    }
+
+    // Otherwise it's pure numeric dimensions (e.g. "220 × 40 × 180 سم" or "200 × 160")
+    // Extract trailing unit if any
+    const unitMatch = spaced.match(/(?:سم|متر|cm|mm|m)\s*$/i);
+    const unit = unitMatch ? unitMatch[0].trim() : '';
+    const numericOnly = parts
+      .map((p) => p.replace(/(?:سم|متر|cm|mm|m)/gi, '').trim())
+      .join(' × ');
 
     return (
-      <span className={styles.sizeWrapper}>
+      <div className={styles.numericDimsWrapper}>
         <bdi dir="ltr" className={styles.dimensionNumbers}>
-          {normalizedDims}
+          {numericOnly}
         </bdi>
-        {rawUnit && (
+        {unit && (
           <span className={styles.unitLabel}>
-            <bdi>{rawUnit}</bdi>
+            <bdi>{unit}</bdi>
           </span>
         )}
-      </span>
+      </div>
     );
   }
 
   // Single number + measurement unit (e.g. "200 سم", "180 cm")
   const singleMeasureRegex = /^([\d\.]+)\s*(.*)$/;
-  const singleMatch = trimmed.match(singleMeasureRegex);
+  const singleMatch = spaced.match(singleMeasureRegex);
   if (singleMatch && singleMatch[2]) {
     return (
-      <span className={styles.sizeWrapper}>
+      <div className={styles.numericDimsWrapper}>
         <bdi dir="ltr" className={styles.dimensionNumbers}>
           {singleMatch[1]}
         </bdi>
         <span className={styles.unitLabel}>
           <bdi>{singleMatch[2].trim()}</bdi>
         </span>
-      </span>
+      </div>
     );
   }
 
   // Text fallback (e.g. "Standard", "كبير", "Large")
   return (
-    <span className={styles.sizeText}>
-      <bdi>{trimmed}</bdi>
-    </span>
+    <div className={styles.sizeText}>
+      <bdi>{spaced}</bdi>
+    </div>
   );
 };
 
