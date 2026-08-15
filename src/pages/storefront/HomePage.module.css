@@ -632,6 +632,9 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .homeContainer {
+    gap: 3.5rem;
+  }
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -640,7 +643,8 @@
     font-size: 2.5rem;
   }
   .productsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
   }
   .offerBanner {
     grid-template-columns: 1fr;
@@ -648,14 +652,37 @@
   .editorialCard {
     grid-template-columns: 1fr;
   }
+  .editorialImageWrapper {
+    min-height: 280px;
+  }
   .editorialContent {
     padding: 2.5rem;
   }
 }
 
+@media (max-width: 768px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .categoriesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 640px) {
+  .homeContainer {
+    gap: 2.75rem;
+  }
+  .heroSection {
+    padding: 1.5rem 0 0.5rem;
+  }
   .heroHeading {
-    font-size: 2rem;
+    font-size: 1.85rem;
+  }
+  .heroParagraph {
+    font-size: 0.95rem;
   }
   .heroCtas {
     flex-direction: column;
@@ -664,11 +691,59 @@
   .primaryCta, .secondaryCta {
     width: 100%;
     justify-content: center;
+    height: 48px;
   }
+  .heroMetrics {
+    gap: 1rem;
+    justify-content: space-between;
+  }
+  .metricValue {
+    font-size: 1.25rem;
+  }
+  .floatingCard {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    padding: 0.625rem 0.875rem;
+  }
+  [dir="rtl"] .floatingCard {
+    left: auto;
+    right: 0.75rem;
+  }
+  .categoriesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .categoryCard {
+    aspect-ratio: 1 / 1;
+    padding: 1rem;
+  }
+  .productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .offerContent {
+    padding: 2rem 1.25rem;
+  }
+  .offerImageContainer {
+    min-height: 260px;
+  }
+  .editorialContent {
+    padding: 1.5rem;
+  }
+  .editorialTitle {
+    font-size: 1.5rem;
+  }
+  .editorialPillars {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 380px) {
   .productsGrid {
     grid-template-columns: 1fr;
   }
-  .offerContent {
-    padding: 2rem 1.5rem;
+  .categoriesGrid {
+    grid-template-columns: 1fr;
   }
 }

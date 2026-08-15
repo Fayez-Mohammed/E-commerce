@@ -7,6 +7,8 @@
   flex-direction: column;
   transition: all var(--transition-base);
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -44,13 +46,13 @@
 /* Badges */
 .discountBadge {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 0.625rem;
+  left: 0.625rem;
   background-color: var(--color-accent-600);
   color: #FFFFFF;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  padding: 0.25rem 0.625rem;
+  padding: 0.2rem 0.5rem;
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
   z-index: 2;
@@ -58,17 +60,17 @@
 
 [dir="rtl"] .discountBadge {
   left: auto;
-  right: 0.75rem;
+  right: 0.625rem;
 }
 
 .wishlistBtn {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  width: 36px;
-  height: 36px;
+  top: 0.625rem;
+  right: 0.625rem;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(4px);
   color: var(--color-primary-700);
   display: flex;
@@ -77,17 +79,19 @@
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
   z-index: 2;
+  border: none;
+  cursor: pointer;
 }
 
 [dir="rtl"] .wishlistBtn {
   right: auto;
-  left: 0.75rem;
+  left: 0.625rem;
 }
 
 .wishlistBtn:hover {
   background-color: #FFFFFF;
   color: #DC2626;
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .wishlistBtn.active {
@@ -141,15 +145,15 @@
 
 /* Details */
 .details {
-  padding: 1.125rem;
+  padding: 1rem 1.125rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.375rem;
   flex: 1;
 }
 
 .category {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   color: var(--color-accent-700);
   text-transform: uppercase;
@@ -157,7 +161,7 @@
 }
 
 .title {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1.35;
   color: var(--text-primary);
@@ -165,7 +169,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 2.7rem;
+  min-height: 2.5rem;
 }
 
 .title a {
@@ -182,12 +186,13 @@
   align-items: center;
   gap: 0.375rem;
   font-size: 0.8125rem;
+  margin-top: 0.125rem;
 }
 
 .stars {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .starIcon {
@@ -202,6 +207,7 @@
 
 .reviewCount {
   color: var(--text-muted);
+  font-size: 0.75rem;
 }
 
 /* Price */
@@ -216,18 +222,45 @@
 .prices {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
 }
 
 .currentPrice {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: var(--color-primary-950);
+  white-space: nowrap;
 }
 
 .originalPrice {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   text-decoration: line-through;
+  white-space: nowrap;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .details {
+    padding: 0.75rem;
+  }
+  .title {
+    font-size: 0.875rem;
+    min-height: 2.3rem;
+  }
+  .currentPrice {
+    font-size: 0.95rem;
+  }
+  .originalPrice {
+    font-size: 0.75rem;
+  }
+  .discountBadge {
+    font-size: 0.625rem;
+    padding: 0.15rem 0.4rem;
+  }
+  .wishlistBtn {
+    width: 30px;
+    height: 30px;
+  }
 }

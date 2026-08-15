@@ -201,14 +201,39 @@
 @media (max-width: 1024px) {
   .contactGrid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 640px) {
+  .contactPage {
+    padding-top: 1rem;
+    padding-bottom: 3.5rem;
+  }
+  .header {
+    margin-bottom: 2rem;
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+  .subtitle {
+    font-size: 0.9375rem;
+  }
+  .infoHeading {
+    font-size: 1.35rem;
+  }
   .formRow {
     grid-template-columns: 1fr;
   }
   .formSide {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-xl);
+  }
+  .infoCard {
+    padding: 1rem;
+  }
+  .cardIcon {
+    width: 38px;
+    height: 38px;
   }
 }

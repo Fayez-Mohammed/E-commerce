@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -13,6 +13,8 @@ import {
   LogOut,
   Store,
   ShieldAlert,
+  Menu,
+  X,
 } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { useLanguageStore } from '@/stores/languageStore';
@@ -24,6 +26,13 @@ export const AdminLayout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isRtl = direction === 'rtl';
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
 
   if (!isAuthenticated || !isAdmin) {
     return (
@@ -57,16 +66,31 @@ export const AdminLayout: React.FC = () => {
 
   return (
     <div className={styles.adminContainer}>
+      {/* Mobile Backdrop */}
+      {isSidebarOpen && (
+        <div
+          className={styles.sidebarBackdrop}
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
         <div className={styles.sidebarHeader}>
-          <Link to="/" className={styles.brandLogo}>
+          <Link to="/" className={styles.brandLogo} onClick={() => setIsSidebarOpen(false)}>
             <div className={styles.logoBadge}>W</div>
             <div>
               <span className={styles.brandTitle}>WALLSSHOP</span>
               <span className={styles.adminTag}>ADMIN CONSOLE</span>
             </div>
           </Link>
+          <button
+            className={styles.closeSidebarBtn}
+            onClick={() => setIsSidebarOpen(false)}
+            aria-label="Close menu"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         <nav className={styles.sidebarNav}>
@@ -79,6 +103,7 @@ export const AdminLayout: React.FC = () => {
                 key={item.to}
                 to={item.to}
                 className={`${styles.navLink} ${isActive ? styles.navActive : ''}`}
+                onClick={() => setIsSidebarOpen(false)}
               >
                 {item.icon}
                 <span>{item.label}</span>
@@ -109,8 +134,17 @@ export const AdminLayout: React.FC = () => {
       {/* Main Content Area */}
       <div className={styles.mainWrapper}>
         <header className={styles.adminHeader}>
-          <div className={styles.headerTitle}>
-            <h2>{t('adminDashboard')}</h2>
+          <div className={styles.headerLeft}>
+            <button
+              className={styles.mobileMenuBtn}
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label="Toggle admin sidebar"
+            >
+              <Menu size={22} />
+            </button>
+            <div className={styles.headerTitle}>
+              <h2>{t('adminDashboard')}</h2>
+            </div>
           </div>
 
           <div className={styles.headerUser}>

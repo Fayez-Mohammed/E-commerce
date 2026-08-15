@@ -271,3 +271,33 @@
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
+
+@media (max-width: 640px) {
+  .authContainer {
+    padding: 1.5rem 1rem;
+    min-height: calc(100vh - 160px);
+  }
+  .authCard {
+    padding: 2rem 1.25rem;
+    border-radius: var(--radius-xl);
+    gap: 1.25rem;
+  }
+  .authTitle {
+    font-size: 1.45rem;
+  }
+  .authSubtitle {
+    font-size: 0.875rem;
+  }
+  .logoBadge {
+    width: 42px;
+    height: 42px;
+    font-size: 1.25rem;
+  }
+  .authInput {
+    height: 46px;
+    font-size: 0.875rem;
+  }
+  .submitBtn {
+    height: 46px;
+  }
+}

@@ -202,7 +202,12 @@ export const ShopPage: React.FC = () => {
 
       {/* Main Layout Grid (Sidebar + Products) */}
       <div className={styles.mainLayout}>
-        {/* Sidebar Categories (Desktop) */}
+        {/* Mobile Backdrop */}
+        {isMobileFilterOpen && (
+          <div className={styles.sidebarBackdrop} onClick={() => setIsMobileFilterOpen(false)} />
+        )}
+
+        {/* Sidebar Categories */}
         <aside className={`${styles.sidebar} ${isMobileFilterOpen ? styles.mobileOpen : ''}`}>
           <div className={styles.sidebarHeader}>
             <div className={styles.sidebarTitle}>

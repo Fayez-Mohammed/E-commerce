@@ -370,12 +370,23 @@
   background-color: var(--color-accent-600);
 }
 
+/* Mobile Backdrop */
+.sidebarBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(12, 10, 9, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1990;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .shopHeader {
     flex-direction: column;
     align-items: flex-start;
     padding: 2rem;
+    gap: 1.5rem;
   }
   .shopSearchForm {
     max-width: 100%;
@@ -388,37 +399,81 @@
   }
   .sidebar {
     position: fixed;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
     z-index: 2000;
+    width: 85vw;
     max-width: 320px;
     border-radius: 0;
     display: none;
     overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    animation: slideDrawerLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  [dir="rtl"] .sidebar {
+    left: auto;
+    right: 0;
+    animation-name: slideDrawerRight;
   }
   .sidebar.mobileOpen {
     display: flex;
   }
   .closeSidebarBtn {
     display: block;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-subtle);
   }
   .productsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
   }
 }
 
 @media (max-width: 640px) {
+  .shopPage {
+    padding-top: 1rem;
+    padding-bottom: 3.5rem;
+  }
+  .shopHeader {
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
   .pageTitle {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+  .pageSubtitle {
+    font-size: 0.9375rem;
   }
   .actionBar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: stretch;
+    gap: 0.875rem;
+  }
+  .actionLeft {
+    justify-content: space-between;
+    width: 100%;
   }
   .actionRight {
     width: 100%;
     justify-content: space-between;
   }
+  .sortSelect {
+    flex: 1;
+    max-width: 200px;
+  }
+  .productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 380px) {
   .productsGrid {
     grid-template-columns: 1fr;
   }

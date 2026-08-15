@@ -510,28 +510,71 @@
     grid-template-columns: 1fr;
   }
   .spotlightImageWrapper {
-    min-height: 300px;
+    min-height: 280px;
   }
   .spotlightDetails {
     padding: 2rem;
   }
   .offersGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
   .heroTitle {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+  .heroSubtitle {
+    font-size: 0.9375rem;
   }
   .heroBanner {
-    padding: 3.5rem 0 4rem;
+    padding: 2.5rem 0 3.5rem;
+  }
+  .spotlightSection {
+    margin-top: -2rem;
+    margin-bottom: 3rem;
+  }
+  .spotlightDetails {
+    padding: 1.25rem;
+  }
+  .spotlightTitle {
+    font-size: 1.35rem;
+  }
+  .countdownContainer {
+    padding: 1rem;
+  }
+  .countdownBoxes {
+    gap: 0.375rem;
+  }
+  .timeBox {
+    padding: 0.4rem 0.25rem;
+  }
+  .timeNum {
+    font-size: 1.15rem;
+  }
+  .timeLabel {
+    font-size: 0.625rem;
+  }
+  .claimOfferBtn {
+    width: 100%;
+    align-self: stretch;
+    height: 48px;
+    padding: 0 1rem;
   }
   .offersGrid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .cardBody {
+    padding: 1.25rem;
+  }
+  .valuesSection {
+    margin-top: 3rem;
+    padding: 2rem 1.25rem;
   }
   .valuesGrid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.75rem;
   }
 }
