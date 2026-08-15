@@ -314,6 +314,7 @@
 /* Offer Banner Section */
 .offerSection {
   margin: 1rem auto;
+  touch-action: pan-y;
 }
 
 .offerBanner {
@@ -325,6 +326,7 @@
   align-items: center;
   box-shadow: var(--shadow-xl);
   border: 1px solid rgba(217, 119, 6, 0.2);
+  touch-action: pan-y;
 }
 
 .offerContent {

@@ -142,6 +142,56 @@ export const HomePage: React.FC = () => {
     setActiveOfferIndex((prev) => (prev - 1 + offersList.length) % offersList.length);
   }, [offersList.length]);
 
+  // Touch / Swipe Gesture Handlers for Mobile Carousel
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const touchEndY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
+    touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
+    setIsOfferPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    if (
+      touchStartX.current !== null &&
+      touchEndX.current !== null &&
+      touchStartY.current !== null &&
+      touchEndY.current !== null
+    ) {
+      const diffX = touchStartX.current - touchEndX.current;
+      const diffY = Math.abs(touchStartY.current - touchEndY.current);
+      const minSwipeDistance = 40; // minimum displacement in px to trigger slide change
+
+      // Verify that horizontal displacement is greater than vertical (to prevent interfering with vertical scrolling)
+      if (Math.abs(diffX) > minSwipeDistance && Math.abs(diffX) > diffY) {
+        if (diffX > 0) {
+          // Swiped left (finger moved from right to left) -> Next offer
+          handleNextOffer();
+        } else {
+          // Swiped right (finger moved from left to right) -> Previous offer
+          handlePrevOffer();
+        }
+      }
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+    touchEndX.current = null;
+    touchEndY.current = null;
+    setIsOfferPaused(false);
+  };
+
   return (
     <div className={styles.homeContainer}>
       {/* Hero Section */}
@@ -158,28 +208,29 @@ export const HomePage: React.FC = () => {
 
             <div className={styles.heroCtas}>
               <Link to="/shop" className={styles.primaryCta}>
+                <ShoppingBag size={18} />
                 <span>{t('shopNow')}</span>
                 {isRtl ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
               </Link>
-              <Link to="/shop?category=living-room" className={styles.secondaryCta}>
+              <Link to="/categories" className={styles.secondaryCta}>
                 <span>{t('exploreCategories')}</span>
               </Link>
             </div>
 
-            {/* Quick Metrics */}
+            {/* Micro Metrics Proof */}
             <div className={styles.heroMetrics}>
               <div className={styles.metricItem}>
-                <span className={styles.metricValue}>+1,200</span>
-                <span className={styles.metricLabel}>{language === 'ar' ? 'قطعة فاخرة' : 'Unique Pieces'}</span>
+                <span className={styles.metricValue}>+500</span>
+                <span className={styles.metricLabel}>{language === 'ar' ? 'تصميم مودرن' : 'Modern Designs'}</span>
               </div>
               <div className={styles.metricDivider} />
               <div className={styles.metricItem}>
                 <span className={styles.metricValue}>100%</span>
-                <span className={styles.metricLabel}>{language === 'ar' ? 'خشب طبيعي زان وبلوط' : 'Solid Natural Woods'}</span>
+                <span className={styles.metricLabel}>{language === 'ar' ? 'خشب زان طبيعي' : 'Solid Natural Wood'}</span>
               </div>
               <div className={styles.metricDivider} />
               <div className={styles.metricItem}>
-                <span className={styles.metricValue}>5.0 ★</span>
+                <span className={styles.metricValue}>4.9/5</span>
                 <span className={styles.metricLabel}>{language === 'ar' ? 'تقييم العملاء' : 'Customer Rating'}</span>
               </div>
             </div>
@@ -188,8 +239,8 @@ export const HomePage: React.FC = () => {
           <div className={styles.heroVisual}>
             <div className={styles.heroImageWrapper}>
               <img
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
-                alt="Luxury Modern Living Furniture"
+                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80"
+                alt="Luxury Modern Furniture Showcase"
                 className={styles.heroImage}
                 loading="eager"
               />
@@ -205,12 +256,16 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Promotional Offers Showcase Slider (Zero-Flicker Cross-Fade Carousel) */}
+      {/* Promotional Offers Showcase Slider (Zero-Flicker Cross-Fade Carousel with Touch/Swipe Gestures) */}
       {offersList.length > 0 && (
         <section
           className={`container ${styles.offerSection}`}
           onMouseEnter={() => setIsOfferPaused(true)}
           onMouseLeave={() => setIsOfferPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
         >
           <div className={styles.offerBanner}>
             <div className={styles.offerContent}>
